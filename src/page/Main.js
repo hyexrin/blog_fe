@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Main = () => {
+	const [hello, setHello] = useState('')
+
+	useEffect(() => {
+		axios.get('/api/boards/date')
+			.then(response => setHello(response.data))
+			.catch(error => console.log(error))
+	}, []);
+
 	return (
-		<div>Main</div>
-	)
+		<div>
+			백엔드에서 가져온 데이터입니다 : {hello}
+		</div>
+	);
 }
 
 export default Main
+
